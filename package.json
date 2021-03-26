@@ -1,0 +1,12 @@
+{
+  "name": "dotdigital-pwa-toolkit",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["storefront"],
+  "scripts": {
+    "develop": "cp ./sandbox.env storefront/.env && yarn watch",
+    "watch": "yarn --cwd storefront watch"
+  }
+}
