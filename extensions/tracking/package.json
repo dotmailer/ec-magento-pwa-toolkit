@@ -1,0 +1,23 @@
+{
+  "name": "@dotdigital/pwa-studio-tracking",
+  "version": "0.0.1",
+  "description": "Supports Page, ROI and Web Behaviour Tracking in PWA Studio.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "(OSL-3.0 OR AFL-3.0)",
+  "peerDependencies": {
+    "@apollo/client": "3.3.11",
+    "@magento/pwa-buildpack": "^9.0.0",
+    "@magento/venia-ui": "^7.0.0",
+    "graphql-tag": "^2.11.0",
+    "react": "^17.0.2"
+  },
+  "pwa-studio": {
+    "targets": {
+      "intercept": "./intercept"
+    }
+  }
+}

@@ -28,6 +28,12 @@ function localIntercept(targets) {
         wrapChatModuleTargetable
     } = require('@dotdigital/pwa-studio-chat/targets');
     wrapChatModuleTargetable(targetables);
+
+    /** Tracking extension */
+    const {
+        wrapTrackingModuleTargetable
+    } = require('@dotdigital/pwa-studio-tracking/targets');
+    wrapTrackingModuleTargetable(targetables);
 }
 
 module.exports = localIntercept;

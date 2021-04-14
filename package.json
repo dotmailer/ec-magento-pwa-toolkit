@@ -7,7 +7,8 @@
   "license": "UNLICENSED",
   "workspaces": [
     "extensions/chat",
-    "extensions/signin-wrapper"
+    "extensions/signin-wrapper",
+    "extensions/tracking"
   ],
   "scripts": {
     "buildpack": "buildpack",
@@ -34,8 +35,9 @@
   },
   "dependencies": {
     "@magento/pwa-buildpack": "~8.0.1",
-    "@dotdigital/pwa-studio-chat": "0.0.1",
-    "@dotdigital/pwa-studio-signin-wrapper": "0.0.1"
+    "@dotdigital/pwa-studio-tracking": "0.0.1",
+    "@dotdigital/pwa-studio-signin-wrapper": "0.0.1",
+    "@dotdigital/pwa-studio-chat": "0.0.1"
   },
   "devDependencies": {
     "@adobe/apollo-link-mutation-queue": "~1.0.2",
