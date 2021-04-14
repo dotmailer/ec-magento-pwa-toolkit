@@ -38,7 +38,8 @@ export const useGuestCheckoutForm = props => {
                         }
                     });
                 }
-            } catch {
+            } catch (err) {
+                console.log(err);
                 return;
             }
         }

@@ -23,6 +23,12 @@ const { Targetables } = require('@magento/pwa-buildpack');
 function localIntercept(targets) {
     const targetables = Targetables.using(targets);
 
+    /** Email capture extension */
+    const {
+        wrapEmailCaptureModuleTargetable
+    } = require('@dotdigital/pwa-studio-email-capture/targets');
+    wrapEmailCaptureModuleTargetable(targetables);
+
     /** Chat extension */
     const {
         wrapChatModuleTargetable

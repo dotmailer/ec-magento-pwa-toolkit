@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 import { Form } from 'informed';
 import { useToasts } from '@magento/peregrine';
-import { useNewsletterSignup } from './useNewsletterSignup';
+import { useNewsletterSignup } from '../../talons/NewsletterSignup/useNewsletterSignup';
 
 import { mergeClasses } from '@magento/venia-ui/lib/classify';
 import Button from '@magento/venia-ui/lib/components/Button';
