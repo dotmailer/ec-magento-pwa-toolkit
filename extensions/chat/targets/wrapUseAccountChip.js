@@ -2,17 +2,17 @@ import { useEffect, useCallback } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 
-import chatWidgetOperations from '@dotdigital/pwa-studio-chat/lib/talons/ChatWidget/chatWidget.gql';
+import chatWidgetOperations from '../lib/talons/ChatWidget/chatWidget.gql';
 import BrowserPersistence from "@magento/peregrine/lib/util/simplePersistence";
 
 const storage = new BrowserPersistence();
 
-const wrapUseAccountChip = (original) => {
-    return function useAccountChip(props, ...restArgs) {
-        console.log("Calling useAccountChip() function!")
+export default function wrapUseAccountChip(original) {
+    return function useAccountChip(...args) {
+        console.log('calling useAccountChip with', ...args);
 
         // Run the original, wrapped function
-        const { ...defaultReturnData } = original(props, ...restArgs);
+        const { ...defaultReturnData } = original(...args);
 
         const [{ isSignedIn }] = useUserContext();
         const profileUpdateStatusKey = 'ddg_chat_profile_update_status';
@@ -53,28 +53,26 @@ const wrapUseAccountChip = (original) => {
         );
 
         useEffect(() => {
-            if (isSignedIn && customerData) {
-                if (!hasUpdatedProfile(profileUpdateStatusKey)) {
-                    const profileId = getProfileId();
-                    if (profileId) {
-                        console.log("updating chat profile id: " + profileId);
-                        updateProfile(profileId);
+                if (isSignedIn && customerData) {
+                    if (!hasUpdatedProfile(profileUpdateStatusKey)) {
+                        const profileId = getProfileId();
+                        if (profileId) {
+                            console.log("updating chat profile id: " + profileId);
+                            updateProfile(profileId);
+                        }
+                    }
+                } else {
+                    if (hasUpdatedProfile(profileUpdateStatusKey)) {
+                        saveHasUpdatedProfile(profileUpdateStatusKey, false);
                     }
                 }
-            } else {
-                if (hasUpdatedProfile(profileUpdateStatusKey)) {
-                    saveHasUpdatedProfile(profileUpdateStatusKey, false); 
-                }
-            }
-        },
-        [customerData]
+            },
+            [customerData]
         );
 
         return { ...defaultReturnData };
     }
 };
-
-export default wrapUseAccountChip;
 
 /* helpers */
 export function getProfileId() {
@@ -88,3 +86,4 @@ export function saveHasUpdatedProfile(key, value) {
 export function hasUpdatedProfile(key) {
     return storage.getItem(key);
 }
+

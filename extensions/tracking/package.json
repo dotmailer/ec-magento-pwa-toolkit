@@ -9,10 +9,9 @@
   "author": "",
   "license": "(OSL-3.0 OR AFL-3.0)",
   "peerDependencies": {
-    "@apollo/client": "3.3.11",
-    "@magento/pwa-buildpack": "^9.0.0",
+    "@apollo/client": "^3.3.11",
+    "@magento/pwa-buildpack": "^8.0.1",
     "@magento/venia-ui": "^7.0.0",
-    "graphql-tag": "^2.11.0",
     "react": "^17.0.2"
   },
   "pwa-studio": {

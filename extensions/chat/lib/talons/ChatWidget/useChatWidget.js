@@ -54,7 +54,7 @@ const useChatWidget = () => {
         }
     }, [chatData]);
 
-    const storageKey = chatData.chatData.cookie_name;
+    const storageKey = (chatData && chatData.chatData.cookie_name) ? chatData.chatData.cookie_name : '';
 
     const updateProfile = useCallback(
         async event => {
@@ -94,7 +94,11 @@ export default useChatWidget;
 
 /* helpers */
 export function retrieveChatData() {
-    return storage.getItem('chatData');
+    try {
+        return storage.getItem('chatData');
+    } catch (error) {
+        return false;
+    }
 }
 
 export function saveChatData(data) {

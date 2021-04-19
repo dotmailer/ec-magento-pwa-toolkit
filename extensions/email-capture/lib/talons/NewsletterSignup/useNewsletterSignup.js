@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import {useCallback, useRef } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 
 import mergeOperations from '@magento/peregrine/lib/util/shallowMerge';
@@ -32,7 +32,7 @@ export const useNewsletterSignup = props => {
         skip: !cartId
     });
 
-    const [formApi, setFormApi] = useState();
+    const formApiRef = useRef();
 
     const handleSubmit = useCallback(
         async formValues => {
@@ -49,13 +49,19 @@ export const useNewsletterSignup = props => {
                         }
                     });
                 }
+
+                // Tracking - requires @dotdigital/pwa-studio-tracking
+                if (typeof window.dmPt !== 'undefined') {
+                    console.log("Email Tracked");
+                    window.dmPt('identify', formValues.email);
+                }
             } catch {
                 // we have an onError link that logs errors, and FormError already renders this error, so just return
                 // to avoid triggering the success callback
                 return;
             }
             if (afterSubmit) {
-                formApi.reset();
+                formApiRef.current.reset();
                 afterSubmit();
             }
         },
@@ -66,6 +72,6 @@ export const useNewsletterSignup = props => {
         formErrors: [subscribeEmailToNewsletterError],
         handleSubmit,
         isDisabled: isSubmitting,
-        setFormApi
+        formApiRef
     };
 };

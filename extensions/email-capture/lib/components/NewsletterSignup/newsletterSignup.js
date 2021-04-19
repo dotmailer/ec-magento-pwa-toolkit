@@ -29,14 +29,12 @@ const NewsletterSignup = props => {
         });
     }, [addToast, formatMessage]);
 
-    const talonProps = useNewsletterSignup({ afterSubmit });
-
     const {
         formErrors,
         handleSubmit,
         isDisabled,
-        setFormApi
-    } = talonProps;
+        formApiRef
+    } = useNewsletterSignup({ afterSubmit });
 
     return (
         <div className={classes.root}>
@@ -44,7 +42,7 @@ const NewsletterSignup = props => {
                 <Form
                     className={classes.form}
                     onSubmit={handleSubmit}
-                    getApi={setFormApi}
+                    getApi={formApi => (formApiRef.current = formApi)}
                 >
                     <Field label="Email" required={true}>
                         <TextInput
@@ -54,7 +52,6 @@ const NewsletterSignup = props => {
                             validate={isRequired}
                             validateOnBlur
                             placeholder="Email"
-                            label="Email"
                         />
                     </Field>
                     <FormError errors={formErrors} />

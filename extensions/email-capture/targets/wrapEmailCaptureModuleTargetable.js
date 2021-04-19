@@ -28,7 +28,7 @@ module.exports = (targetables, options = {}) => {
 
     GuestFormComponent.insertAfterSource('} = talonProps;',
         `
-            const talonProps2 = useGuestCheckoutForm ({
+            const talonProps2 = useGuestCheckoutForm({
                 ...DdgFormOperations
             });
             const {
@@ -43,4 +43,31 @@ module.exports = (targetables, options = {}) => {
             onBlur: '{ handleBlur }'
         }
     );
+
+    /* SignIn */
+    const SignInComponent = targetables.reactComponent(
+        '@magento/venia-ui/lib/components/SignIn/signIn.js'
+    );
+
+    SignInComponent.addImport(
+        "import { useEmailCaptureSignIn } from '@dotdigital/pwa-studio-email-capture/lib/talons/SignIn/useEmailCaptureSignIn'"
+    );
+
+    SignInComponent.insertAfterSource('} = talonProps;',
+        `
+            const talonProps2 = useEmailCaptureSignIn();
+            const {
+                handleBlur
+            } = talonProps2;
+        `
+    );
+
+    SignInComponent.setJSXProps(
+        'TextInput autoComplete="email" field="email"',
+        {
+            onBlur: '{ handleBlur }'
+        }
+    );
+
+
 };

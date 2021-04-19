@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/client';
-import gql from "graphql-tag";
+import { gql, useQuery } from '@apollo/client';
 
 const GET_TRACKING_DATA = gql`
     query getTrackingData {
@@ -12,7 +11,7 @@ const GET_TRACKING_DATA = gql`
     }
 `;
 
-const useTrackingData = (props) => {
+const useTrackingData = () => {
     const { data } = useQuery(GET_TRACKING_DATA);
     return data;
 };

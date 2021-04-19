@@ -17,4 +17,17 @@ module.exports = (targetables, options = {}) => {
     );
     MainComponent.insertAfterSource('<Footer />', '\n<WebBehaviorTracking />\n');
 
+    const ReceiptComponent = targetables.reactComponent(
+        '@magento/venia-ui/lib/components/CheckoutPage/OrderConfirmationPage/orderConfirmationPage.js'
+    );
+
+    ReceiptComponent.addImport(
+        "import { RoiTracking } from '@dotdigital/pwa-studio-tracking'"
+    );
+
+    ReceiptComponent.insertAfterSource('</StoreTitle>', '\n<RoiTracking/>\n');
+
+    ReceiptComponent.setJSXProps(`RoiTracking`, {
+        'data': '{orderNumber}'
+    });
 };
