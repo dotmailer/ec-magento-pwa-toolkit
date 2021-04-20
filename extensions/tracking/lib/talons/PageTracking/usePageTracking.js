@@ -24,9 +24,10 @@ const usePageTracking = () => {
 
     useEffect(() => {
         return history.listen((location) => {
-            console.log(`dotdigital tracking: You changed the page to: ${location.pathname}`)
+            if (process.env.NODE_ENV === 'development') {
+                console.log(`dotdigital tracking: You changed the page to: ${location.pathname}`)
+            }
             if (typeof window._dmCallHandler == 'function') {
-                console.log('dotdigital triggered page tracking')
                 window._dmCallHandler();
             }
         })

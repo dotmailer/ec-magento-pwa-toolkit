@@ -9,7 +9,6 @@ const storage = new BrowserPersistence();
 
 export default function wrapUseAccountChip(original) {
     return function useAccountChip(...args) {
-        console.log('calling useAccountChip with', ...args);
 
         // Run the original, wrapped function
         const { ...defaultReturnData } = original(...args);
@@ -57,7 +56,9 @@ export default function wrapUseAccountChip(original) {
                     if (!hasUpdatedProfile(profileUpdateStatusKey)) {
                         const profileId = getProfileId();
                         if (profileId) {
-                            console.log("updating chat profile id: " + profileId);
+                            if (process.env.NODE_ENV === 'development') {
+                                console.log("Updating chat profile id: " + profileId);
+                            }
                             updateProfile(profileId);
                         }
                     }

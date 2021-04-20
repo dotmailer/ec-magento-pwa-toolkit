@@ -52,7 +52,6 @@ export const useNewsletterSignup = props => {
 
                 // Tracking - requires @dotdigital/pwa-studio-tracking
                 if (typeof window.dmPt !== 'undefined') {
-                    console.log("Email Tracked");
                     window.dmPt('identify', formValues.email);
                 }
             } catch {

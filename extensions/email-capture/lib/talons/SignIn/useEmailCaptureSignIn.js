@@ -6,7 +6,6 @@ export const useEmailCaptureSignIn = () => {
         async inputValue => {
             // Tracking - requires @dotdigital/pwa-studio-tracking
             if (typeof window.dmPt !== 'undefined') {
-                console.log("Email Tracked");
                 window.dmPt('identify', inputValue.target.value);
             }
         }
