@@ -49,7 +49,9 @@ const useChatWidget = () => {
             document.body.appendChild(script);
 
             return () => {
-                document.body.removeChild(script);
+                if (document.body) {
+                    document.body.removeChild(script);
+                }
             }
         }
     }, [chatData]);

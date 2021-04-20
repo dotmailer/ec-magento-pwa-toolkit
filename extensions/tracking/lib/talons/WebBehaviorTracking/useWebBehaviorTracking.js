@@ -24,7 +24,9 @@ const useWebBehaviourTracking = () => {
         }
 
         return () => {
-            document.body.removeChild(script);
+            if (document.body) {
+                document.body.removeChild(script);
+            }
         }
     }, [data]);
 
