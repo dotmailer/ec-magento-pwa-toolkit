@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import useTrackingData from '../../hooks/useTrackingData';
 
 const usePageTracking = () => {
-    const history = useHistory();
     const data = useTrackingData();
+    const [currentLocation, setCurrentLocation] = useState({
+        pathname: ''
+    });
 
     // dmmpt for Page Tracking
     useEffect(() => {
@@ -22,16 +23,19 @@ const usePageTracking = () => {
         }
     }, [data]);
 
-    useEffect(() => {
-        return history.listen((location) => {
+    /*
+     * window._dmCallHandler() must fire on initial page load in order to store the dm_i cookie
+     * Hence we cannot solely rely on history.listen
+     * */
+    if (typeof window._dmCallHandler == 'function') {
+        if (!currentLocation || currentLocation.pathname !== window.location.pathname) {
+            setCurrentLocation({pathname: window.location.pathname});
             if (process.env.NODE_ENV === 'development') {
-                console.log(`dotdigital tracking: You changed the page to: ${location.pathname}`)
+                console.log('dotdigital triggered page tracking: ' + window.location.pathname)
             }
-            if (typeof window._dmCallHandler == 'function') {
-                window._dmCallHandler();
-            }
-        })
-    }, [history]);
+            window._dmCallHandler();
+        }
+    }
 };
 
 export default usePageTracking;
