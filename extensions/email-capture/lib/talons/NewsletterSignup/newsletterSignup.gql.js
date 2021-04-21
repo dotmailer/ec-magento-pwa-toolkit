@@ -31,8 +31,17 @@ export const CART_QUERY = gql`
     }
 `;
 
+export const EMAIL_CAPTURE_NEWSLETTER = gql`
+    query isEasyEmailCaptureNewsletterEnabled {
+        emailCaptureNewsletter {
+            is_enabled
+        }
+    }
+`;
+
 export default {
     subscribeEmailToNewsletterMutation: SUBSCRIBE_EMAIL_TO_NEWSLETTER,
     updateQuoteEmailMutation: UPDATE_QUOTE_EMAIL,
-    getCartQuery: CART_QUERY
+    getCartQuery: CART_QUERY,
+    isEasyEmailCaptureNewsletterEnabled: EMAIL_CAPTURE_NEWSLETTER
 };

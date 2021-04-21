@@ -13,7 +13,8 @@ export const useNewsletterSignup = props => {
     const {
         subscribeEmailToNewsletterMutation,
         updateQuoteEmailMutation,
-        getCartQuery
+        getCartQuery,
+        isEasyEmailCaptureNewsletterEnabled
     } = operations;
 
     const [{ cartId }] = useCartContext();
@@ -26,6 +27,10 @@ export const useNewsletterSignup = props => {
     const [
         updateQuoteEmail
     ] = useMutation(updateQuoteEmailMutation);
+
+    const { data: queryData } = useQuery(
+        isEasyEmailCaptureNewsletterEnabled
+    );
 
     const { data: cartData } = useQuery(getCartQuery, {
         variables: { cartId },
@@ -41,7 +46,11 @@ export const useNewsletterSignup = props => {
                     variables: formValues
                 });
 
-                if (cartData && !cartData.cart.email && cartData.cart.items) {
+                if (cartData &&
+                    !cartData.cart.email &&
+                    cartData.cart.items &&
+                    queryData.emailCaptureNewsletter.is_enabled
+                ) {
                     await updateQuoteEmail({
                         variables: {
                             email: formValues.email,
@@ -64,7 +73,14 @@ export const useNewsletterSignup = props => {
                 afterSubmit();
             }
         },
-        [subscribeEmailToNewsletter, updateQuoteEmail, cartData, getCartQuery, afterSubmit]
+        [
+            subscribeEmailToNewsletter,
+            updateQuoteEmail,
+            cartData,
+            queryData,
+            getCartQuery,
+            afterSubmit
+        ]
     );
 
     return {

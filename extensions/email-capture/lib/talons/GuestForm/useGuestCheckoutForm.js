@@ -30,7 +30,7 @@ export const useGuestCheckoutForm = props => {
     const handleBlur = useCallback(
         async inputValue => {
             try {
-                if (queryData.isEasyEmailCaptureCheckoutEnabled.is_enabled) {
+                if (queryData.emailCaptureCheckout.is_enabled) {
                     await updateQuoteEmail({
                         variables: {
                             email: inputValue.target.value,

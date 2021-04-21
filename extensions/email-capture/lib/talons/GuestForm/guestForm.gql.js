@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const EMAIL_CAPTURE_CHECKOUT = gql`
     query isEasyEmailCaptureCheckoutEnabled {
-        isEasyEmailCaptureCheckoutEnabled {
+        emailCaptureCheckout {
             is_enabled
         }
     }
