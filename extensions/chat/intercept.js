@@ -1,16 +1,30 @@
-module.exports = targets => {
-    const buildpackTargets = targets.of('@magento/pwa-buildpack');
-    const { talons } = targets.of('@magento/peregrine');
+const DEF_NAME = 'ddgChatContentSecurityPolicy';
 
-    buildpackTargets.specialFeatures.tap(flags => {
-        flags[targets.name] = {
+module.exports = targets => {
+    targets.of('@magento/peregrine').talons.tap(talons => {
+        talons.AccountChip.useAccountChip.wrapWith("@dotdigital/pwa-studio-chat/targets/wrapUseAccountChip");
+    });
+
+    const builtins = targets.of('@magento/pwa-buildpack');
+
+    builtins.specialFeatures.tap(features => {
+        features[targets.name] = {
             esModules: true,
             cssModules: true,
-            graphqlQueries: true
+            graphqlQueries: true,
+            upward: true
         };
     });
 
-    targets.of('@magento/peregrine').talons.tap(talons => {
-        talons.AccountChip.useAccountChip.wrapWith("@dotdigital/pwa-studio-chat/targets/wrapUseAccountChip");
+    builtins.transformUpward.tapPromise(async definitions => {
+        if (!definitions[DEF_NAME]) {
+            throw new Error(
+                `${
+                    targets.name
+                } could not find its own definition in the emitted upward.yml`
+            );
+        }
+
+        definitions.veniaSecurityHeaders.inline['content-security-policy'] = DEF_NAME;
     });
 };
