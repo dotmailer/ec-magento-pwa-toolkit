@@ -22,11 +22,11 @@ const useWebBehaviourTracking = () => {
                     window.dmPt('create', data.trackingData.wbt_profile_id)
             )
             document.body.appendChild(script);
-        }
 
-        return () => {
-            if (document.body) {
-                document.body.removeChild(script);
+            return () => {
+                if (document.body) {
+                    document.body.removeChild(script);
+                }
             }
         }
     }, [data]);

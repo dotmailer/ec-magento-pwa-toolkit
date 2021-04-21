@@ -14,11 +14,11 @@ const usePageTracking = () => {
             script.src = 'https://' + data.trackingData.region_prefix + 't.trackedlink.net/_dmmpt.js';
 
             document.body.appendChild(script);
-        }
 
-        return () => {
-            if (document.body) {
-                document.body.removeChild(script);
+            return () => {
+                if (document.body) {
+                    document.body.removeChild(script);
+                }
             }
         }
     }, [data]);
