@@ -1,15 +1,17 @@
 {
   "name": "@dotdigital/pwa-studio-tracking",
-  "version": "0.0.1",
-  "description": "Supports Page, ROI and Web Behaviour Tracking in PWA Studio.",
+  "version": "1.0.0",
+  "description": "Supports Page, ROI and Web Behavior Tracking in Magento PWA Studio.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "repository": "github:dotmailer/ec-magento-pwa-toolkit",
+  "author": "dotdigital",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dotmailer/ec-magento-pwa-toolkit/issues"
   },
-  "author": "",
-  "license": "(OSL-3.0 OR AFL-3.0)",
   "peerDependencies": {
     "@apollo/client": "^3.3.11",
+    "@magento/peregrine": "^9.0.0",
     "@magento/pwa-buildpack": "^8.0.1",
     "@magento/venia-ui": "^7.0.0",
     "react": "^17.0.2"
