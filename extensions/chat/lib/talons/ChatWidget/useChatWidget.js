@@ -8,6 +8,8 @@ import BrowserPersistence from "@magento/peregrine/lib/util/simplePersistence";
 
 const storage = new BrowserPersistence();
 
+const refreshInterval = 6;
+
 const useChatWidget = () => {
 
     const [{ currentUser }] = useUserContext();
@@ -19,10 +21,10 @@ const useChatWidget = () => {
     } = operations;
 
     const { data } = useQuery(getChatData);
+
     const [updateChatProfile] = useMutation(updateChatProfileMutation);
 
-    // check local storage for existing api_space_id
-    if (!retrieveChatData()) {
+    if (!retrieveChatData() || shouldRefreshChatData()){
         saveChatData(data);
     }
 
@@ -100,6 +102,22 @@ export function retrieveChatData() {
         return storage.getItem('chatData');
     } catch (error) {
         return false;
+    }
+}
+
+/**
+ * If the chat data was stored over 6 hours ago, let's refresh it.
+ * This means, if Chat is disabled in the Magento admin, the widget will persist for max 6 hours.
+ * @returns {boolean}
+ */
+export function shouldRefreshChatData() {
+    try {
+        const item = storage.getRawItem('chatData');
+        const { timeStored } = JSON.parse(item);
+
+        return Math.abs(Date.now() - new Date(timeStored)) / 36e5 > refreshInterval;
+    } catch (error) {
+        return true;
     }
 }
 
