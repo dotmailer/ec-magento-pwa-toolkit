@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import useTrackingData from '../../hooks/useTrackingData';
 
 const useWebBehaviourTracking = () => {
-    const history = useHistory();
     const data = useTrackingData();
+    const [currentLocation, setCurrentLocation] = useState({
+        pathname: ''
+    });
 
     // dmptv4 for WBT
     useEffect( () => {
@@ -31,13 +32,19 @@ const useWebBehaviourTracking = () => {
         }
     }, [data]);
 
-    useEffect(() => {
-        return history.listen((location) => {
-            if (typeof window.dmPt == 'function') {
-                window.dmPt('track');
+    /*
+     * window.dmPt('track') must fire on initial page load.
+     * Hence we cannot solely rely on history.listen
+     * */
+    if (typeof window.dmPt == 'function') {
+        if (!currentLocation || currentLocation.pathname !== window.location.pathname) {
+            setCurrentLocation({pathname: window.location.pathname});
+            if (process.env.NODE_ENV === 'development') {
+                console.log('dotdigital triggered web behaviour tracking: ' + window.location.pathname)
             }
-        })
-    }, [history]);
+            window.dmPt('track');
+        }
+    }
 };
 
 export default useWebBehaviourTracking;
