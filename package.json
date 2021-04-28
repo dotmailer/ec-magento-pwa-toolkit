@@ -1,0 +1,15 @@
+{
+  "name": "@dotdigital/ec-magento-pwa-toolkit",
+  "version": "1.0.0",
+  "description": "A toolkit for merchants integrating dotdigital's Magento modules in a Venia PWA storefront.",
+  "private": true,
+  "author": "dotdigital",
+  "license": "MIT",
+  "workspaces": [
+    "extensions/*"
+  ],
+  "repository": "github:dotmailer/ec-magento-pwa-toolkit",
+  "bugs": {
+    "url": "https://github.com/dotmailer/ec-magento-pwa-toolkit/issues"
+  }
+}
