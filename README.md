@@ -17,7 +17,7 @@ As a minimum, you will need:
 
 ## Using our extensions
 
-Our extensions are published separately to NPM. If you wish to use our code as is, you can add these extensions using yarn, for example:
+Our extensions are published separately to [NPM](https://www.npmjs.com/org/dotdigital). If you wish to use our code as is, you can add these extensions using yarn, for example:
 
     yarn add @dotdigital/pwa-studio-tracking
 
