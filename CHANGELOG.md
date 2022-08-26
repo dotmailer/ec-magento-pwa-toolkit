@@ -1,3 +1,8 @@
+# 1.1.0
+
+### What's new
+- Web behaviour tracking script now tracks all available product data from product pages.
+
 # 1.0.0
 
 ### What's new

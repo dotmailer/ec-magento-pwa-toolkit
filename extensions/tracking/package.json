@@ -1,6 +1,6 @@
 {
   "name": "@dotdigital/pwa-studio-tracking",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Supports Page, ROI and Web Behavior Tracking in Magento PWA Studio.",
   "main": "index.js",
   "repository": "github:dotmailer/ec-magento-pwa-toolkit",
