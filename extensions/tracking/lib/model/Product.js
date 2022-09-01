@@ -34,7 +34,7 @@ export class Product {
     {
         return {
             product_name: this.name || '',
-            product_url: window.location.protocol + window.location.host + window.location.pathname || '',
+            product_url: window.location.protocol + '//' + window.location.host + window.location.pathname || '',
             product_currency: this.price.regular_price.currency || '',
             product_status: this.stock_status === 'IN_STOCK' ? 'In stock' : 'Out of stock',
             product_price: this.price.regular_price.value || 0,
