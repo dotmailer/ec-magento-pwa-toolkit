@@ -1,11 +1,11 @@
-import {gql} from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const GET_PRODUCT_BRAND_VALUE = gql`
     query getProductBrandValue($product_ids: [String]!) {
         productBrands(product_ids: $product_ids) {
-            items{
-              brand
-              product_id
+            items {
+                brand
+                product_id
             }
         }
     }

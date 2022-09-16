@@ -1,4 +1,4 @@
-import {useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 
 import mergeOperations from '@magento/peregrine/lib/util/shallowMerge';
@@ -9,7 +9,10 @@ import newsletterSignupOperations from './newsletterSignup.gql';
 export const useNewsletterSignup = props => {
     const { afterSubmit } = props;
 
-    const operations = mergeOperations(newsletterSignupOperations, props.operations);
+    const operations = mergeOperations(
+        newsletterSignupOperations,
+        props.operations
+    );
     const {
         subscribeEmailToNewsletterMutation,
         updateQuoteEmailMutation,
@@ -24,13 +27,9 @@ export const useNewsletterSignup = props => {
         { error: subscribeEmailToNewsletterError, loading: isSubmitting }
     ] = useMutation(subscribeEmailToNewsletterMutation);
 
-    const [
-        updateQuoteEmail
-    ] = useMutation(updateQuoteEmailMutation);
+    const [updateQuoteEmail] = useMutation(updateQuoteEmailMutation);
 
-    const { data: queryData } = useQuery(
-        isEasyEmailCaptureNewsletterEnabled
-    );
+    const { data: queryData } = useQuery(isEasyEmailCaptureNewsletterEnabled);
 
     const { data: cartData } = useQuery(getCartQuery, {
         variables: { cartId },
@@ -46,7 +45,8 @@ export const useNewsletterSignup = props => {
                     variables: formValues
                 });
 
-                if (cartData &&
+                if (
+                    cartData &&
                     !cartData.cart.email &&
                     cartData.cart.items &&
                     queryData.emailCaptureNewsletter.is_enabled
@@ -78,8 +78,8 @@ export const useNewsletterSignup = props => {
             updateQuoteEmail,
             cartData,
             queryData,
-            getCartQuery,
-            afterSubmit
+            afterSubmit,
+            cartId
         ]
     );
 

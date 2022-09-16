@@ -2,7 +2,9 @@ const DEF_NAME = 'ddgChatContentSecurityPolicy';
 
 module.exports = targets => {
     targets.of('@magento/peregrine').talons.tap(talons => {
-        talons.AccountChip.useAccountChip.wrapWith("@dotdigital/pwa-studio-chat/targets/wrapUseAccountChip");
+        talons.AccountChip.useAccountChip.wrapWith(
+            '@dotdigital/pwa-studio-chat/targets/wrapUseAccountChip'
+        );
     });
 
     const builtins = targets.of('@magento/pwa-buildpack');
@@ -25,6 +27,8 @@ module.exports = targets => {
             );
         }
 
-        definitions.veniaSecurityHeaders.inline['content-security-policy'] = DEF_NAME;
+        definitions.veniaSecurityHeaders.inline[
+            'content-security-policy'
+        ] = DEF_NAME;
     });
 };

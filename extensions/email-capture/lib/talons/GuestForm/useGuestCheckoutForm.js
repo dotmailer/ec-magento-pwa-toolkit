@@ -8,7 +8,6 @@ import newsletterSignupOperations from '../NewsletterSignup/newsletterSignup.gql
 import guestFormOperations from './guestForm.gql';
 
 export const useGuestCheckoutForm = props => {
-
     const operations = mergeOperations(
         newsletterSignupOperations,
         guestFormOperations,
@@ -23,9 +22,7 @@ export const useGuestCheckoutForm = props => {
 
     const [updateQuoteEmail] = useMutation(updateQuoteEmailMutation);
 
-    const { data: queryData } = useQuery(
-        isEasyEmailCaptureCheckoutEnabled
-    );
+    const { data: queryData } = useQuery(isEasyEmailCaptureCheckoutEnabled);
 
     const handleBlur = useCallback(
         async inputValue => {
@@ -47,7 +44,8 @@ export const useGuestCheckoutForm = props => {
                 console.log(err);
                 return;
             }
-        }, [queryData]
+        },
+        [queryData, cartId, updateQuoteEmail]
     );
 
     return {

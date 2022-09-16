@@ -1,1 +1,1 @@
-export {default} from './newsletterSignup';
+export { default } from './newsletterSignup';

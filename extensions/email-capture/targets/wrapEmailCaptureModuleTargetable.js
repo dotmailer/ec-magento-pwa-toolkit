@@ -1,8 +1,4 @@
-module.exports = (targetables, options = {}) => {
-    const moduleOptions = {
-        ...options
-    };
-
+module.exports = targetables => {
     /* NewsletterSignup */
     const FooterComponent = targetables.reactComponent(
         '@magento/venia-ui/lib/components/Footer/footer.js'
@@ -11,8 +7,10 @@ module.exports = (targetables, options = {}) => {
     FooterComponent.addImport(
         "import NewsletterSignup from '@dotdigital/pwa-studio-email-capture'"
     );
-    FooterComponent.insertBeforeSource('{linkGroups}', '<NewsletterSignup />\n');
-
+    FooterComponent.insertBeforeSource(
+        '{linkGroups}',
+        '<NewsletterSignup />\n'
+    );
 
     /* GuestForm */
     const GuestFormComponent = targetables.reactComponent(
@@ -26,7 +24,8 @@ module.exports = (targetables, options = {}) => {
         "import DdgFormOperations from '@dotdigital/pwa-studio-email-capture/lib/talons/GuestForm/guestForm.gql'"
     );
 
-    GuestFormComponent.insertAfterSource('} = talonProps;',
+    GuestFormComponent.insertAfterSource(
+        '} = talonProps;',
         `
             const talonProps2 = useGuestCheckoutForm({
                 ...DdgFormOperations
@@ -37,12 +36,9 @@ module.exports = (targetables, options = {}) => {
         `
     );
 
-    GuestFormComponent.setJSXProps(
-        'TextInput field="email" id="email"',
-        {
-            onBlur: '{ handleBlur }'
-        }
-    );
+    GuestFormComponent.setJSXProps('TextInput field="email" id="email"', {
+        onBlur: '{ handleBlur }'
+    });
 
     /* SignIn */
     const SignInComponent = targetables.reactComponent(
@@ -53,7 +49,8 @@ module.exports = (targetables, options = {}) => {
         "import { useEmailCaptureSignIn } from '@dotdigital/pwa-studio-email-capture/lib/talons/SignIn/useEmailCaptureSignIn'"
     );
 
-    SignInComponent.insertAfterSource('} = talonProps;',
+    SignInComponent.insertAfterSource(
+        '} = talonProps;',
         `
             const talonProps2 = useEmailCaptureSignIn();
             const {
@@ -68,6 +65,4 @@ module.exports = (targetables, options = {}) => {
             onBlur: '{ handleBlur }'
         }
     );
-
-
 };

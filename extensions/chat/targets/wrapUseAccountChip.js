@@ -3,13 +3,12 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 import chatWidgetOperations from '../lib/talons/ChatWidget/chatWidget.gql';
-import BrowserPersistence from "@magento/peregrine/lib/util/simplePersistence";
+import BrowserPersistence from '@magento/peregrine/lib/util/simplePersistence';
 
 const storage = new BrowserPersistence();
 
 export default function wrapUseAccountChip(original) {
     return function useAccountChip(...args) {
-
         // Run the original, wrapped function
         const { ...defaultReturnData } = original(...args);
 
@@ -21,14 +20,11 @@ export default function wrapUseAccountChip(original) {
             updateChatProfileMutation
         } = chatWidgetOperations;
 
-        const { data: customerData } = useQuery(
-            getCustomerData,
-            {
-                skip: !isSignedIn,
-                fetchPolicy: 'cache-and-network',
-                nextFetchPolicy: 'cache-first'
-            }
-        );
+        const { data: customerData } = useQuery(getCustomerData, {
+            skip: !isSignedIn,
+            fetchPolicy: 'cache-and-network',
+            nextFetchPolicy: 'cache-first'
+        });
 
         const [updateChatProfile] = useMutation(updateChatProfileMutation);
 
@@ -52,28 +48,28 @@ export default function wrapUseAccountChip(original) {
         );
 
         useEffect(() => {
-                if (isSignedIn && customerData) {
-                    if (!hasUpdatedProfile(profileUpdateStatusKey)) {
-                        const profileId = getProfileId();
-                        if (profileId) {
-                            if (process.env.NODE_ENV === 'development') {
-                                console.log("Updating chat profile id: " + profileId);
-                            }
-                            updateProfile(profileId);
+            if (isSignedIn && customerData) {
+                if (!hasUpdatedProfile(profileUpdateStatusKey)) {
+                    const profileId = getProfileId();
+                    if (profileId) {
+                        if (process.env.NODE_ENV === 'development') {
+                            console.log(
+                                'Updating chat profile id: ' + profileId
+                            );
                         }
-                    }
-                } else {
-                    if (hasUpdatedProfile(profileUpdateStatusKey)) {
-                        saveHasUpdatedProfile(profileUpdateStatusKey, false);
+                        updateProfile(profileId);
                     }
                 }
-            },
-            [customerData]
-        );
+            } else {
+                if (hasUpdatedProfile(profileUpdateStatusKey)) {
+                    saveHasUpdatedProfile(profileUpdateStatusKey, false);
+                }
+            }
+        }, [customerData, isSignedIn, updateProfile]);
 
         return { ...defaultReturnData };
-    }
-};
+    };
+}
 
 /* helpers */
 export function getProfileId() {
@@ -87,4 +83,3 @@ export function saveHasUpdatedProfile(key, value) {
 export function hasUpdatedProfile(key) {
     return storage.getItem(key);
 }
-

@@ -1,1 +1,1 @@
-export {default} from './RoiTracking';
+export { default } from './RoiTracking';

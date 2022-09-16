@@ -1,30 +1,26 @@
 import { useEffect, useCallback } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useEventListener } from '@magento/peregrine/lib/hooks/useEventListener';
-import { useUserContext } from "@magento/peregrine/lib/context/user";
+import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 import chatWidgetOperations from './chatWidget.gql';
-import BrowserPersistence from "@magento/peregrine/lib/util/simplePersistence";
+import BrowserPersistence from '@magento/peregrine/lib/util/simplePersistence';
 
 const storage = new BrowserPersistence();
 
 const refreshInterval = 6;
 
 const useChatWidget = () => {
-
     const [{ currentUser }] = useUserContext();
     const operations = chatWidgetOperations;
 
-    const {
-        getChatData,
-        updateChatProfileMutation
-    } = operations;
+    const { getChatData, updateChatProfileMutation } = operations;
 
     const { data } = useQuery(getChatData);
 
     const [updateChatProfile] = useMutation(updateChatProfileMutation);
 
-    if (!retrieveChatData() || shouldRefreshChatData()){
+    if (!retrieveChatData() || shouldRefreshChatData()) {
         saveChatData(data);
     }
 
@@ -34,19 +30,21 @@ const useChatWidget = () => {
         if (chatData && chatData.chatData.is_enabled) {
             const script = document.createElement('script');
 
-            script.dangerouslySetInnerHTML = (
-                window._ddgChatConfig = {
-                    apiSpace: chatData.chatData.api_space_id,
-                    urlBase: 'https://webchat.dotdigital.com'
-                },
-                (function(d, s, id){
-                    var js, cjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) {return;}
-                    js = d.createElement(s); js.id = id;
-                    js.src = 'https://webchat.dotdigital.com/widget/bootstrap.js';
-                    cjs.parentNode.insertBefore(js, cjs);
-                }(document, 'script', 'ddg-chat-widget'))
-            )
+            script.dangerouslySetInnerHTML = ((window._ddgChatConfig = {
+                apiSpace: chatData.chatData.api_space_id,
+                urlBase: 'https://webchat.dotdigital.com'
+            }),
+            (function(d, s, id) {
+                var js;
+                var cjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {
+                    return;
+                }
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://webchat.dotdigital.com/widget/bootstrap.js';
+                cjs.parentNode.insertBefore(js, cjs);
+            })(document, 'script', 'ddg-chat-widget'));
 
             document.body.appendChild(script);
 
@@ -54,11 +52,14 @@ const useChatWidget = () => {
                 if (document.body) {
                     document.body.removeChild(script);
                 }
-            }
+            };
         }
     }, [chatData]);
 
-    const storageKey = (chatData && chatData.chatData.cookie_name) ? chatData.chatData.cookie_name : '';
+    const storageKey =
+        chatData && chatData.chatData.cookie_name
+            ? chatData.chatData.cookie_name
+            : '';
 
     const updateProfile = useCallback(
         async event => {
@@ -69,7 +70,6 @@ const useChatWidget = () => {
                 if (event.data.show === 'hidden') {
                     // user has closed the chat
                     clearProfileId(storageKey);
-
                 } else if (getProfileId(storageKey) == null) {
                     const profile = await window.COMAPI_WIDGET_API.profile.getProfile();
                     saveProfileId(storageKey, profile.id);
@@ -89,7 +89,7 @@ const useChatWidget = () => {
                 return;
             }
         },
-        [chatData, updateChatProfile]
+        [updateChatProfile, currentUser, storageKey]
     );
     useEventListener(window, 'message', updateProfile);
 };
@@ -115,7 +115,9 @@ export function shouldRefreshChatData() {
         const item = storage.getRawItem('chatData');
         const { timeStored } = JSON.parse(item);
 
-        return Math.abs(Date.now() - new Date(timeStored)) / 36e5 > refreshInterval;
+        return (
+            Math.abs(Date.now() - new Date(timeStored)) / 36e5 > refreshInterval
+        );
     } catch (error) {
         return true;
     }

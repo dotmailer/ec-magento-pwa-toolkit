@@ -2,9 +2,7 @@ import { gql } from '@apollo/client';
 
 export const SUBSCRIBE_EMAIL_TO_NEWSLETTER = gql`
     mutation subscribeEmailToNewsletter($email: String!) {
-        subscribeEmailToNewsletter(
-            email: $email
-        ) {
+        subscribeEmailToNewsletter(email: $email) {
             status
         }
     }
@@ -12,10 +10,7 @@ export const SUBSCRIBE_EMAIL_TO_NEWSLETTER = gql`
 
 export const UPDATE_QUOTE_EMAIL = gql`
     mutation updateQuoteEmail($email: String!, $cartId: String!) {
-        updateQuoteEmail(
-            email: $email,
-            cartId: $cartId
-        )
+        updateQuoteEmail(email: $email, cartId: $cartId)
     }
 `;
 

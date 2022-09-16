@@ -9,8 +9,8 @@ import Button from '@magento/venia-ui/lib/components/Button';
 import TextInput from '@magento/venia-ui/lib/components/TextInput';
 import Field from '@magento/venia-ui/lib/components/Field';
 import defaultClasses from './newsletterSignup.css';
-import FormError from "@magento/venia-ui/lib/components/FormError";
-import {isRequired} from "@magento/venia-ui/lib/util/formValidators";
+import FormError from '@magento/venia-ui/lib/components/FormError';
+import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
 
 const NewsletterSignup = props => {
     const { formatMessage } = useIntl();
@@ -56,7 +56,11 @@ const NewsletterSignup = props => {
                     </Field>
                     <FormError errors={formErrors} />
                     <div className={classes.actions}>
-                        <Button disabled={isDisabled} type="submit" priority="high">
+                        <Button
+                            disabled={isDisabled}
+                            type="submit"
+                            priority="high"
+                        >
                             {'Submit'}
                         </Button>
                     </div>

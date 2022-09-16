@@ -12,15 +12,15 @@ export const GET_CHAT_DATA = gql`
 
 export const UPDATE_CHAT_PROFILE = gql`
     mutation UpdateChatProfile(
-        $profileId: String!,
-        $email: String,
-        $firstname: String,
+        $profileId: String!
+        $email: String
+        $firstname: String
         $lastname: String
     ) {
         updateChatProfile(
-            profileId: $profileId,
-            email: $email,
-            firstname: $firstname,
+            profileId: $profileId
+            email: $email
+            firstname: $firstname
             lastname: $lastname
         )
     }

@@ -1,14 +1,11 @@
-import {useQuery} from "@apollo/client";
-import {GET_STORE_CONFIG_DATA} from "../queries/store.gql";
-import {useMemo} from "react";
+import { useQuery } from '@apollo/client';
+import { GET_STORE_CONFIG_DATA } from '../queries/store.gql';
+import { useMemo } from 'react';
 
 export const useStoreSlug = () => {
-
-    const {
-        loading:loading,
-        error:error,
-        data: storeConfigData
-    } = useQuery(GET_STORE_CONFIG_DATA);
+    const { loading: loading, error: error, data: storeConfigData } = useQuery(
+        GET_STORE_CONFIG_DATA
+    );
     const productUrlSuffix = useMemo(() => {
         if (storeConfigData) {
             return storeConfigData.storeConfig.product_url_suffix;
@@ -23,6 +20,5 @@ export const useStoreSlug = () => {
         slug,
         urlKey,
         storeConfigData
-    }
-}
-
+    };
+};

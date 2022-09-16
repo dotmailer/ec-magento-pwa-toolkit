@@ -11,7 +11,10 @@ const usePageTracking = () => {
     useEffect(() => {
         const script = document.createElement('script');
         if (data && data.trackingData.page_tracking_enabled) {
-            script.src = 'https://' + data.trackingData.region_prefix + 't.trackedlink.net/_dmmpt.js';
+            script.src =
+                'https://' +
+                data.trackingData.region_prefix +
+                't.trackedlink.net/_dmmpt.js';
 
             document.body.appendChild(script);
 
@@ -19,7 +22,7 @@ const usePageTracking = () => {
                 if (document.body) {
                     document.body.removeChild(script);
                 }
-            }
+            };
         }
     }, [data]);
 
@@ -28,10 +31,16 @@ const usePageTracking = () => {
      * Hence we cannot solely rely on history.listen
      * */
     if (typeof window._dmCallHandler == 'function') {
-        if (!currentLocation || currentLocation.pathname !== window.location.pathname) {
-            setCurrentLocation({pathname: window.location.pathname});
+        if (
+            !currentLocation ||
+            currentLocation.pathname !== window.location.pathname
+        ) {
+            setCurrentLocation({ pathname: window.location.pathname });
             if (process.env.NODE_ENV === 'development') {
-                console.log('dotdigital triggered page tracking: ' + window.location.pathname)
+                console.log(
+                    'dotdigital triggered page tracking: ' +
+                        window.location.pathname
+                );
             }
             window._dmCallHandler();
         }

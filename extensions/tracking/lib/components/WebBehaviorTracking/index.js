@@ -1,1 +1,1 @@
-export {default} from './WebBehaviorTracking';
+export { default } from './WebBehaviorTracking';

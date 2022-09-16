@@ -8,8 +8,25 @@
   "workspaces": [
     "extensions/*"
   ],
+  "scripts": {
+    "eslint": "./node_modules/.bin/eslint ./extensions   --ignore-pattern node_modules --ignore-pattern docs",
+    "eslint:fix": "eslint ./extensions --fix  --ignore-pattern node_modules --ignore-pattern docs"
+  },
   "repository": "github:dotmailer/ec-magento-pwa-toolkit",
   "bugs": {
     "url": "https://github.com/dotmailer/ec-magento-pwa-toolkit/issues"
+  },
+  "devDependencies": {
+    "babel-eslint": "~10.1.0",
+    "eslint": "~7.32.0",
+    "eslint-plugin-babel": "~5.3.0",
+    "eslint-plugin-jsx-a11y": "~6.4.1",
+    "eslint-plugin-node": "~8.0.1",
+    "eslint-plugin-package-json": "~0.1.4",
+    "eslint-plugin-react": "~7.21.5",
+    "eslint-plugin-react-hooks": "~4.2.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-config-prettier": "~8.5.0",
+    "prettier": "~1.16.4"
   }
 }

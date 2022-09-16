@@ -9,12 +9,12 @@ const GET_ORDER_DETAILS = gql`
     }
 `;
 
-const useOrderDetails = ({orderNumber}) => {
+const useOrderDetails = ({ orderNumber }) => {
     const { data } = useQuery(GET_ORDER_DETAILS, {
-        variables : {orderNumber},
+        variables: { orderNumber },
         skip: !orderNumber,
         fetchPolicy: 'network-only',
-        onCompleted: (data) => {
+        onCompleted: data => {
             return data;
         }
     });

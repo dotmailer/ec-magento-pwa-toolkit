@@ -1,8 +1,4 @@
-module.exports = (targetables, options = {}) => {
-    const moduleOptions = {
-        ...options
-    };
-
+module.exports = targetables => {
     const MainComponent = targetables.reactComponent(
         '@magento/venia-ui/lib/components/Main/main.js'
     );
@@ -15,7 +11,10 @@ module.exports = (targetables, options = {}) => {
     MainComponent.addImport(
         "import { WebBehaviorTracking }  from '@dotdigital/pwa-studio-tracking'"
     );
-    MainComponent.insertAfterSource('<Footer />', '\n<WebBehaviorTracking />\n');
+    MainComponent.insertAfterSource(
+        '<Footer />',
+        '\n<WebBehaviorTracking />\n'
+    );
 
     const ReceiptComponent = targetables.reactComponent(
         '@magento/venia-ui/lib/components/CheckoutPage/OrderConfirmationPage/orderConfirmationPage.js'
@@ -28,6 +27,6 @@ module.exports = (targetables, options = {}) => {
     ReceiptComponent.insertAfterSource('</StoreTitle>', '\n<RoiTracking/>\n');
 
     ReceiptComponent.setJSXProps(`RoiTracking`, {
-        'data': '{orderNumber}'
+        data: '{orderNumber}'
     });
 };

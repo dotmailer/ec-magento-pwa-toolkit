@@ -1,5 +1,4 @@
-import React from 'react';
-import usePageTracking from "../../talons/PageTracking/usePageTracking";
+import usePageTracking from '../../talons/PageTracking/usePageTracking';
 
 const PageTracking = () => {
     usePageTracking();

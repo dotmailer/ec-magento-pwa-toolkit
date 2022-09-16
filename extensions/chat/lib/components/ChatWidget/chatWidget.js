@@ -1,7 +1,6 @@
-import React from 'react';
 import useChatWidget from '../../talons/ChatWidget/useChatWidget';
 
-const ChatWidget = props => {
+const ChatWidget = () => {
     useChatWidget();
     return null;
 };

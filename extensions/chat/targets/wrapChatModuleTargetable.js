@@ -1,8 +1,4 @@
-module.exports = (targetables, options = {}) => {
-    const moduleOptions = {
-        ...options
-    };
-
+module.exports = targetables => {
     const MainComponent = targetables.reactComponent(
         '@magento/venia-ui/lib/components/Main/main.js'
     );
@@ -11,5 +7,4 @@ module.exports = (targetables, options = {}) => {
         "import ChatWidget from '@dotdigital/pwa-studio-chat'"
     );
     MainComponent.insertAfterSource('<Footer />', '\n<ChatWidget />\n');
-
 };
