@@ -36,7 +36,7 @@ We have two GraphQl modules that support our extensions:
 ## Our extensions
 
 ### Chat
-@dotdigital/chat adds:
+@dotdigital/pwa-studio-chat adds:
 
 - a component to deliver the chat widget
 - a sign-in wrapper to update the chat profile after a customer signs in to their account 
@@ -44,7 +44,7 @@ We have two GraphQl modules that support our extensions:
 The widget will only display if Chat is enabled in Magento.
 
 ### Email Capture
-@dotdigital/email-capture adds:
+@dotdigital/pwa-studio-email-capture adds:
 
 - a `NewsletterSignup` component. This subscribes email addresses exactly as per regular Magento; our module in Magento picks up the submission and handles the data from there. If a guest cart exists, we’ll attempt to update the quote table with the email address at submit.
 - a `handleBlur` prop for the `GuestForm` component. This adds an onBlur handler to capture an email address at guest checkout.
@@ -62,6 +62,12 @@ Tracking scripts will only be added if the required configuration settings are e
 
 [User identification](https://support.dotdigital.com/hc/en-gb/articles/219045108-Install-Web-behavior-tracking) is currently implemented in the @dotdigital/pwa-studio-email-capture extension. 
 
+### Page Builder
+@dotdigital/pwa-studio-page-builder adds support for the Dotdigital Form content type in Page Builder. Use this extension to have your pages and forms display via Page Builder on your PWA storefront.
+
+Known issues and limitations:
+- Note that our support for Page Builder in Magento is currently limited to Adobe Commerce. 
+- Adding both embedded- and popover-style forms to a single page is currently not supported. 
 
 ## Contribution
 
@@ -69,4 +75,4 @@ We welcome contributions to this toolkit. You may wish to:
 
 - [Report a bug](https://github.com/dotmailer/ec-magento-pwa-toolkit/issues): create a GitHub issue including description, repro steps, Magento and extension version numbers
 - [Fix a bug](https://github.com/dotmailer/ec-magento-pwa-toolkit/pulls): please clone and use our develop branch to submit your pull request
-- Request a feature on our [roadmap](https://r1.dotdigital-pages.com/p/35E-386/the-engagement-cloud-roadmap)
+- Request a feature on our [roadmap](https://r1.dotdigital-pages.com/p/35E-386/dotdigital-roadmap)

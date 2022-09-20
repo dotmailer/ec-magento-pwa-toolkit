@@ -40,6 +40,15 @@ function localIntercept(targets) {
         wrapTrackingModuleTargetable
     } = require('@dotdigital/pwa-studio-tracking/targets');
     wrapTrackingModuleTargetable(targetables);
+
+    /** Page Builder extension */
+    const {
+        wrapRichContentModuleTargetable
+    } = require('@dotdigital/pwa-studio-page-builder/targets');
+    wrapRichContentModuleTargetable(targetables, {targets:targets});
+
+
+
 }
 
 module.exports = localIntercept;

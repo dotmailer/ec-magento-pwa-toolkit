@@ -1,0 +1,18 @@
+ddgPageBuilderContentSecurityPolicy:
+  resolver: template
+  engine: mustache
+  provide:
+    backend: env.MAGENTO_BACKEND_URL
+  template:
+    resolver: conditional
+    when:
+      - matches: env.NODE_ENV
+        pattern: development
+        use:
+          inline: ''
+    default:
+      inline: "script-src http: https: {{ backend }}; style-src 'self' blob: https:
+        'unsafe-inline' {{ backend }}; img-src data: http: https:;
+        object-src 'none'; base-uri 'none'; child-src 'self'; font-src
+        'self' fonts.gstatic.com; frame-src assets.braintreegateway.com
+        *.youtube.com *.youtu.be *.vimeo.com *.dotdigital-pages.com"
