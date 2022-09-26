@@ -69,6 +69,10 @@ Known issues and limitations:
 - Note that our support for Page Builder in Magento is currently limited to Adobe Commerce. 
 - Adding both embedded- and popover-style forms to a single page is currently not supported. 
 
+## Server configuration
+
+We have included upward.yml files in the Chat and Page Builder extensions. We found we needed to customise some content security policy rules to ensure everything displayed correctly in a production environment. They are intended as a guide only; merchants should review these, referring back to the `@magento/upward-security-headers` [upward.yml](https://github.com/magento/pwa-studio/blob/develop/packages/extensions/upward-security-headers/upward.yml), before deployment. 
+
 ## Contribution
 
 We welcome contributions to this toolkit. You may wish to:
