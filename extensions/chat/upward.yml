@@ -11,8 +11,4 @@ ddgChatContentSecurityPolicy:
         use:
           inline: ''
     default:
-      inline: "script-src 'unsafe-inline' http: https: {{ backend }}; style-src 'self' blob: https:
-        'unsafe-inline' {{ backend }}; img-src data: http: https:;
-        object-src 'none'; base-uri 'none'; child-src 'self'; font-src
-        'self' fonts.gstatic.com; frame-src assets.braintreegateway.com
-        *.youtube.com *.youtu.be *.vimeo.com webchat.dotdigital.com *.dotdigital-pages.com"
+      inline: "frame-src webchat.dotdigital.com *.dotdigital-pages.com"
