@@ -1,4 +1,3 @@
-
 {
   "name": "@dotdigital/pwa-studio-page-builder",
   "version": "1.0.0",
@@ -13,14 +12,14 @@
   "bugs": {
     "url": "https://github.com/dotmailer/ec-magento-pwa-toolkit/issues"
   },
-
   "peerDependencies": {
-    "@apollo/client": "~3.5.0",
+    "@apollo/client": "^3.1.2",
     "@magento/babel-preset-peregrine": "~1.2.1",
-    "@magento/peregrine": "~12.5.1",
-    "@magento/pwa-buildpack": "~11.4.0",
-    "@magento/venia-ui": "~9.6.0",
-    "react": "~17.0.1"
+    "@magento/peregrine": "^12.0.0",
+    "@magento/pwa-buildpack": "^11.0.0",
+    "@magento/venia-ui": "^9.0.0",
+    "react": "^17.0.2",
+    "graphql": "~15.5.0"
   },
   "pwa-studio": {
     "targets": {

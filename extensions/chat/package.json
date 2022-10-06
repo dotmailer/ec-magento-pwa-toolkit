@@ -11,10 +11,11 @@
   },
   "peerDependencies": {
     "@apollo/client": "^3.1.2",
-    "@magento/peregrine": "^10.0.0",
-    "@magento/pwa-buildpack": "^9.0.0",
-    "@magento/venia-ui": "^7.0.0",
-    "react": "^17.0.2"
+    "@magento/peregrine": "^12.0.0",
+    "@magento/pwa-buildpack": "^11.0.0",
+    "@magento/venia-ui": "^9.0.0",
+    "react": "^17.0.2",
+    "graphql": "~15.5.0"
   },
   "pwa-studio": {
     "targets": {
