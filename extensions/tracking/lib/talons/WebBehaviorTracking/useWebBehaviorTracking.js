@@ -51,10 +51,11 @@ const useWebBehaviourTracking = () => {
                     `WBT profile id: ${data.trackingData.wbt_profile_id}`
                 );
             }
-
             script.dangerouslySetInnerHTML = ((function(w, d, u, t, o, c) {
+                if (d.getElementById('dmptv4')) return;
                 w['dmtrackingobjectname'] = o;
                 c = d.createElement(t);
+                c.setAttribute('id', 'dmptv4');
                 c.async = 1;
                 c.src = u;
                 t = d.getElementsByTagName(t)[0];
@@ -100,7 +101,7 @@ const useWebBehaviourTracking = () => {
                 }
             };
         }
-    }, [collection, brandLoading, data, productsLoading]);
+    }, [collection]); // eslint-disable-line
 };
 
 export default useWebBehaviourTracking;
