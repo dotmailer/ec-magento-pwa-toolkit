@@ -1,4 +1,4 @@
-# dotdigital PWA Toolkit
+# Dotdigital PWA Toolkit
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE.md)
 
 This repository provides a starting point for merchants and developers wishing to integrate features from our existing Magento modules into a [Venia storefront](https://github.com/magento/pwa-studio#venia) project.

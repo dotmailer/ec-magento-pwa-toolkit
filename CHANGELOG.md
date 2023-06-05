@@ -1,3 +1,8 @@
+# 1.1.1
+
+### Improvements
+- We removed our reliance on a separate endpoint to retrieve order details for ROI tracking.
+
 # 1.1.0
 
 ### What's new
