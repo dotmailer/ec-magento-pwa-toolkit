@@ -25,8 +25,7 @@ module.exports = targetables => {
     );
 
     ReceiptComponent.insertAfterSource('</StoreTitle>', '\n<RoiTracking/>\n');
-
     ReceiptComponent.setJSXProps(`RoiTracking`, {
-        data: '{orderNumber}'
+        data: '{data}'
     });
 };

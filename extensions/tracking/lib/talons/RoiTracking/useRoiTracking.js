@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
-import useOrderDetails from '../../hooks/useOrderDetails';
 
-const useRoiTracking = orderNumber => {
-    const orderData = useOrderDetails({ orderNumber });
-
+const useRoiTracking = orderData => {
     useEffect(() => {
-        if (orderData) {
-            orderData.orderData.items.map(element => {
-                window._dmTrack('product', element);
+        if (orderData?.cart?.items) {
+            orderData.cart.items.forEach(cartItem => {
+                window._dmTrack('product', cartItem.product.name);
             });
-            window._dmTrack('CheckOutAmount', orderData.orderData.total);
+            window._dmTrack(
+                'CheckOutAmount',
+                orderData.cart.prices.grand_total.value
+            );
             window._dmCallHandler();
         }
     }, [orderData]);
