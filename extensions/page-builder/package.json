@@ -1,6 +1,6 @@
 {
   "name": "@dotdigital/pwa-studio-page-builder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Supports the use of the Dotdigital Form Page Builder content type in Magento PWA Studio.",
   "main": "index.js",
   "browser": {

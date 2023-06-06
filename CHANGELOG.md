@@ -2,6 +2,11 @@
 
 ### Improvements
 - We removed our reliance on a separate endpoint to retrieve order details for ROI tracking.
+- Our inline content security policy rules are now simpler.
+- We repaired some package dependency errors.
+
+### Bug fixes
+- We fixed a problem with a tracking script being injected multiple times.
 
 # 1.1.0
 
